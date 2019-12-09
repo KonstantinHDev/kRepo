@@ -61,12 +61,12 @@ public class TestMerge {
 		// second touple shouldn´t be merged
 		mt.insert(new int[] { 1, 15 });
 		
-		assertTrue(mt.merge());
+		assertTrue(mt.mergeQuick());
 		assertTrue(mt.getInputList().size() == 2);
 		assertTrue(mt.getInputList().get(0)[0] == 24);
 		assertTrue(mt.getInputList().get(0)[1] == 45);
 		
 		mt = new MergeTask();
-		assertFalse(mt.merge());
+		assertFalse(mt.mergeQuick());
 	}	
 }

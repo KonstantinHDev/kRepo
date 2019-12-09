@@ -70,43 +70,46 @@ public class MergeTask {
 	 * Replaces the current input values which are processed in an stacker.
 	 * Input list will be overwritten for the merged list.
 	 */
-	public boolean merge(){
+	public boolean mergeQuick(){
 		if(input.size() < 2 ) {
 			return false;
 		}
 		
 		// Merge console output
 		System.out.println("-------------");
-		System.out.println("merge");
+		System.out.println("merge quick with low ram usage");
 		System.out.println("-------------");
 		
 		ArrayList<int[]> output = new ArrayList<int[]>();		
 		// run through input untill list is empty
 
+		long iterationsschritte = 0;
 		
 		// if list is checked, redo
 		while(input.size() > 0) {
+		// version b
 			for(int i = 1; i < input.size() ; i ++) {
-				
-				// if subset detected, merge values, remove from current list and		 
+
+				iterationsschritte++;
+				// if subset detected, merge values, remove from current list the merged value and		 
 				// rewrite current interval with a new start/end interval
 				if(isSubset(input.get(0), input.get(i))) {
 					input.set(0, mergeLists(input.get(0), input.get(i)));
 					input.remove(i);
-					
-					// cause a interval removed, decrease iterator
-					i--;
+					i = 0;
 				}
 			}
 			// list finished, replace checked input value into a output list
 			output.add(input.get(0));
 			input.remove(0);
 		}
+		
+		System.out.println("Iterationsteps: " + iterationsschritte );
 		// replaced merged list with input list
 		input = output;
 		return true;
 	}
-	
+		
 	/**
 	 * Merges two intervals
 	 * @param value1 first interval
